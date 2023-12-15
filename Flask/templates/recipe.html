@@ -1,0 +1,54 @@
+
+<!-- {{ template variable }} -->
+<!-- {% code statements, eg. if,elif,else, for loops %} -->
+<!-- {% always close code statement with endif or endfor %} -->
+<!-- template (html) variable | filter applied to it -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <a href="/">Back To Recipe List</a>
+    <h1>{{ template_recipe | title }}</h1>
+    <!-- if conditions -->
+    {% if template_description %}
+    <p>{{ template_description }}</p>
+    {%else%}
+    <p>A {{ template_recipe }} recipe.</p>
+    {% endif %}
+    <!-- if conditions -->
+    <h3>Ingredients - {{ template_ingredients | length}}</h3>
+    <ul>
+        <!-- for loop -->
+        {% for ingredient in template_ingredients %}
+        <li>{{ ingredient }}</li>
+        {% endfor %}
+        <!-- for loop -->
+    </ul>
+    <h3>Instructions</h3>
+    <ul>
+        <!-- for loop with variable filter -->
+        {% for key, instruction in template_instructions | dictsort %} <!-- dictsort is like .items() accessing key, value ! -->
+        <li>{{ instruction }}</li>
+        {% endfor %}
+        <!-- for loop with variable filter -->
+    </ul>
+
+    <h3>Comments</h3>
+    <ul>
+        {% for comment in template_comments %}
+        <li>{{ comment }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- using the flask form class objects as instantiated in app.py -->
+    <form action="/" method="POST">
+        <!-- {{ my_instance.field1.label }} -->
+        {{ template_form.hidden_tag() }} <!-- CSRF protection -->
+        {{ template_form.comment.label }} <!-- creates label tag -->
+        {{ template_form.comment.label(class="label-css") }} <!-- in () can pass CSS classes to style ! -->
+        {{ template_form.comment() }} <!-- creates input type=text tag -->
+        {{ template_form.submit() }} <!-- creates input type=submit tag -->
+    </form>
+
+{% endblock %}

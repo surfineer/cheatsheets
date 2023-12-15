@@ -1,0 +1,482 @@
+/*  specificity cascade (from most specific to least, ID overrides class and so on)
+    ID > class > element 
+    try to keep styling to the type first and only escalate if necessary
+    dimensional properties are shorthand assigned TOP RIGHT BOTTOM LEFT / VERTICAL HORIZONTAL / TOP HORIZONTAL BOTTOM (Box Offset Properties)
+    units: rem/em for fonts, % for non-text
+*/
+/* COLOR PALETTE
+[{"name":"Battleship gray","hex":"88958d","rgb":[136,149,141],"cmyk":[9,0,5,42],"hsb":[143,9,58],"hsl":[143,6,56],"lab":[60,-6,3]},
+{"name":"Ebony","hex":"606d5d","rgb":[96,109,93],"cmyk":[12,0,15,57],"hsb":[109,15,43],"hsl":[109,8,40],"lab":[45,-8,7]},
+{"name":"Rose quartz","hex":"bc9cb0","rgb":[188,156,176],"cmyk":[0,17,6,26],"hsb":[323,17,74],"hsl":[323,19,67],"lab":[68,15,-6]},
+{"name":"French gray","hex":"d3cdd7","rgb":[211,205,215],"cmyk":[2,5,0,16],"hsb":[276,5,84],"hsl":[276,11,82],"lab":[83,4,-4]},
+{"name":"Mint green","hex":"ddf2eb","rgb":[221,242,235],"cmyk":[9,0,3,5],"hsb":[160,9,95],"hsl":[160,45,91],"lab":[94,-8,1]}]
+*/
+* {     /* universal selector - selects all tags */
+    border: 1px solid red;
+}
+h1, h2 {    /* addresses multiple unrelated elements */
+    size: 14px;   
+}
+.classattribute {   /* addressing the class attribute / class selectors override element selectors */
+    color: teal;
+}
+h1.classattribute { /* addresses elements with specific class ("Chaining") */
+    font-family: Tahoma;
+}
+.classattribute h1 { /* addresses elements nested within a class ("Descendant selector") */ 
+    background-color: goldenrod;
+}
+#idattribute { /* addressing the id attribute / id selectors override element and class selectors */
+    font-family: monospace;
+}
+.class > p { /* > selects direct children */
+    color: white;
+}
+.breadcrumb li+li::before { /* + selects the 2nd sibling / used with the ::before pseudo-element to create navigation trails */
+    content: "/";
+}
+[href]{ /* can address any attribute */
+    color: magenta
+}
+img[src*="winter"] { /* addresses elements with specific attributes and values */
+    height: 50px;
+}
+:focus :visited :disabled :active :hover { /* addressing pseudo classes (when user interacts = states) */
+    background-color: azure;
+}
+header::before { /* adds a cosmetic element before the addressed element / ::before is inline element by default */
+    content: "";
+    height: 400px;
+}
+header .mobile ul li:nth-child(4) { /* selects only the 4th li element */
+    display: none;
+}
+.most-important-stuff {
+    display: flex; /*always*/
+    justify-content: center; /*center or space-between*/
+    align-items: start; /*start, center, end*/
+    flex-direction: row; /*row by default, row-reverse*/
+    flex-wrap: wrap; /*nowrap by default, generally wrap*/
+    gap: 2.5rem;
+    padding: 10% 20%; /* vertical padding horizontal padding / best to use % or em*/
+    list-style: none;
+    opacity: 0.5;
+    margin: 0 auto; /* sets a vertical margin of 0 and centers horizontally */
+    margin: auto 0; /* centers vertically and sets a horizontal margin of 0 */
+    margin: auto; /* simple centers horizontally and vertically */
+    margin: 12%; /* margins are best to be used with % / can also take negative numbers (eg. for inline elements) */
+}
+/* ---------------- FLEX BOX ---------------- */
+.flex-container {
+    display: flex; /* inline-flex / for the container / flex items are layed out on the main axis (one dimension) / inline-flex makes container span only width of content (inline element) / height of flex container is same as tallest flex child */
+    flex-direction: column; /* sets main axis = row: vertical alignment (default) / column: horizontal alignment */
+    flex-wrap: nowrap;
+    /* what happens when flex children are bigger than container, wrap to next line within the flex parent container */
+    flex-flow: column wrap;
+    /* short hand property for flex-direction and wrap */
+    /* -------- MAIN AXIS properties -------- */
+    justify-content: center;
+    /* aligns flex items on the main axis / flex-start is default (aligns to main start, usually left) / space-* properties to distribute the space around them, no sizing of the elements */
+    /* -------- CROSS AXIS properties -------- */
+    align-items: center;
+    /* aligns flex items on the cross axis / stretch is default: size is stretched to container / center: size is content size / flex-start: aligns to cross-start (usually top) */
+    align-content: center; /* when scaling, how items are placed */
+}
+.flex-element {
+    flex-grow: 1; /* determines how flex items expand in the flex container / takes unit-less values / 1: extra space is divided evenly across flex children */
+    flex-shrink: 0; /* items will not shrink at all and retain their individual size / if 1: items will be equally shrunk */
+    flex-basis: auto; /* auto: flex item is same as content size / 100px: will set all flex elements to minimum 100px width or height (depending on flex-direction row or columns respectively */
+    flex: 1 0 auto; /* shorthand for flex-grow flex-shrink flex-basis */
+}
+/* ---------------- GRID LAYOUT ---------------- */
+.grid-container {
+    display: grid; /* inline-grid / make the grid container (explicit) / default is 1 column and every child will be in a new row */
+    width: 1000px; /* from this when using % for columns */
+    height: 500px; /* from this when using % for rows */
+    grid-template-columns: 1fr 2fr 1fr; /* gives 3 columns, the 2nd one twice as big as the others / fr = fraction relative to grid container */
+    grid-template-columns: repeat(3, 1fr); /* short hand for 3 columns, all 1fr size */
+    grid-template-rows: 50px repeat(2, 1fr); /* 50px is fixed width or height / set rows for explicit grid */
+    grid-template-rows: repeat(2, 20px 50px); /* 4 rows: 20px 50px 20px 50px */
+    grid-template-columns: 100px minmax(100px, 500px) 100px; /* sets the 2nd column to min 100px and max 500px wide (only when width is not fixed) */
+    grid-template: 200px 300px / 20% 10% 70%; /* shorthand for grid rows / columns*/
+    column-gap: 10px;
+    row-gap: 20px;
+    gap: 5% 2%; /* row-gap column-gap / sets the gutter between the grid elements / when only 1 value will be applied to both */
+    justify-items: start; /* center/ stretch / end / positions grid items along the row(inline) axis / by default will stretch (unless a fixed width is defined for items) */
+    align-items: end; /* positions grid items along the column(block) axis / by default will stretch (unless a fixed height is defined for items) */
+    justify-content: space-around; /* positions the entire grid along the row axis */
+    align-content: space-between; /* positions the rows along the column axis */
+    /* implicit grid is behaviour for extra content that exceeds the set (explicit) grid layout 
+    default behavior is fill up rows first, adding new rows that are same height as the content 
+    takes units of px, %, fr, repeat() */
+    grid-auto-rows: auto; /* specifies height of implicitly added grid rows */
+    grid-auto-columns: auto; /* specifies width of implicitly added grid columns */
+    grid-auto-flow: column dense; /* specifies where extra content is implicitly added (to rows or columns) / dense will fill in any holes earlier in the grid */
+}
+.grid-item {
+    grid-row-start: 1; /* all grid lines start at 1 */
+    grid-row-end: 3; /* will end in row 2 */
+    grid-row: 4 / 6; /* shorthand for row spanning 4th and 5th row covering also the gap */
+    grid-column: 4 / span 2; /* same goes for columns / starting in column 4 and span into column 5 (same as 4/6)*/
+    grid-area: 2 / 3 / 4 / span 5; /* shorthand row-start column-start row-end column-end */
+    justify-self: start; /* how item positions itself across the row axis (overrides justify-items) */
+    align-self: end; /* how item positions itself across the column axis (overrides align-items) */
+}
+/* ---------------- GRID Template Area ---------------- */
+/*         
+
+--> declares sections in HTML as grid-row-start, -end, grid-column-start, -end and grid-area properties
+
+<div class="container">
+    <header>Welcome !</header>
+    <nav>Links !</nav>
+    <section class="info">Info !</section>
+    <section class="services">Services !</section>
+    <footer>Contact us !</footer>
+</div>
+*/
+
+.container {   
+/* In each ruleset below we use the grid-area property to tell that section to cover the portion of the page specified. The header element spans the first row and both columns. The nav element spans the second row and both columns. The element with class .info spans the third row and left column. The element with class .services spans the third row and right column. The footer element spans the bottom row and both columns. */
+    display: grid;
+    max-width: 900px;
+    position: relative;
+    margin: auto;
+    grid-template-areas: "header header"
+        "nav nav"
+        "info services"
+        "footer footer";
+    grid-template-rows: 300px 120px 800px 120px;
+    grid-template-columns: 1fr 3fr;
+}
+
+header {
+    grid-area: header;
+}
+
+nav {
+    grid-area: nav;
+}
+
+.info {
+    grid-area: info;
+}
+
+.services {
+    grid-area: services;
+}
+
+footer {
+    grid-area: footer;
+}
+
+/* ---------------- GRID Overlapping ---------------- */
+/* 
+here is a grid container with eight rows and six columns. There are three grid items within the container — a <div>with the class info,
+a <div>with the class services, and an image. The info section covers all eight rows and the first three columns. The services section covers all eight rows and the last three columns. The image spans the 2nd, 3rd, and 4th rows and the 3rd and 4th columns. The z-index property tells the browser to render the image element on top of the services and info sections so that it is visible.
+*/
+
+.container {
+    display: grid;
+    grid-template: repeat(8, 200px) / repeat(6, 100px);
+}
+
+.info {
+    grid-area: 1 / 1 / 9 / 4;
+}
+
+.services {
+    grid-area: 1 / 4 / 9 / 7;
+}
+
+img {
+    grid-area: 2 / 3 / 5 / 5;
+    z-index: 5;
+}
+
+/* ---------------- Image Scaling / Responsive Layout ---------------- */
+.container {
+    width: 50%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.container img {
+    max-width: 100%; /* swap max-width with max-height:100% and width:auto for horizontal overflow / max- will not make the image stretch beyond it's max size if container gets bigger */
+    width: 100%; /* img will stretch if container is bigger */
+    height: auto;       /* to scale proportionally */
+    display: block; /* to make the image not squish in with following elements */
+}
+
+/* ---------------- ---------------- ---------------- */
+
+.backgrounds {
+    /* Old browsers */
+    background: #141E30;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(-45deg, #35577D, #141E30);
+    background-color: honeydew;
+    background-image: url("image.png");
+    background-repeat: round;
+    background-size: cover;
+    background-attachment: fixed; /* default is scrolled, fixed is nice when set on whole page */
+    background-position: right 20px top 10px; /* adds some padding to positioning*/
+    background-position: bottom center; /* use with background-size: cover
+    SHORTHAND SYNTAX -image -repeat - position - size*/
+    background: url("image.png") no-repeat center/cover;
+}
+.element::before { /* setting a before element with a dark background color to create an overlay effect */
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.important {
+    color: aliceblue !important; /* makes this the dominant style when for example working with multiple stylesheets */
+}
+.element-sizing {
+    box-sizing: border-box; /* default is content-box (where padding and border are added to size, border-box is better because it keeps the size and subtracts border and paddings / should be used for html element */
+}
+.positioning {
+    position: relative; /* static is default, will set relative to the element's static (default) position */
+    top: 50px; /* at least one of the offset properties (top, left, bottom, right) is needed when position: relative */
+    position: absolute; /* positions relative to closest parent element / element is removed from flow of page but only within the parent element */
+    right: 0px; /* will rightbound it */
+    position: fixed; /* element will stay in place even when scrolling, eg. navigation bars / element is removed from flow of page */
+    position: sticky; /* element stays locked in absolute place (relative to parent container) but stays in flow of page */
+    z-index: 1; /* order of depth for relative elements when overlapping may occur / default is 0 / is ignored by static elements */
+}
+
+.clear-and-float {
+    float: left; /* moves elements as far left (or right) as possible within its parent element (works for static and relative positions only) / must have a width */
+    clear: both; /* defines sides of the sibling elements of float (left, right, both, none) will not touch other elements / it creates a clear area to the element */
+    /* Clearfix hack (to avoid overflow) */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.block-formatting-context {
+    /* (BFC) all elements will be contained within the parent container / clears float elements contained */
+    display: flow-root;
+}
+
+.inline-display {
+    display: inline; /* makes any element an inline element */
+    display: block; /* makes an element take up all the horizontal space for it on the page, eg. h1, div, footer elements are block elements by default */
+    display: inline-block; /* elements can share their horizontal space by set width and height */
+}
+
+.cool-stuff-for-hovering {
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    filter: drop-shadow(2px 2px 2px black);
+}
+
+.sticky-footer {
+    display: flex; /* set body element to flexbox layout */
+    flex: 1 0 auto; /* set the flex elements to be at least the size of its contents, not to shrink down, and expand to the avaiable space (this will push the footer down as it is last in the page flow)*/
+}
+
+/* ---------------- Text & Font related stuff ---------------- */
+/* at-rule are statements to tell CSS how to BEHAVE */
+
+@font-face { /* use for downloaded fonts, at beginning of CSS sheet */
+    /* use this before font-family is used / make sure to include several formats (are being loaded from top to bottom! */
+    /* Font formats in decreasing evolution: WOFF2, WOFF, TTF, OTF */
+    font-family: 'Quiksand';
+    src: url('fonts/Quiksand.woff2') format('woff2'),
+        url('fonts/Quiksand.woff') format('woff'),
+        url('fonts/Quiksand.ttf') format('truetype');
+}
+
+.text {
+    vertical-align: super;
+}
+
+html {
+    /* using rem values but with px declaration for easier usage */
+    --8px: 0.5rem;
+    --14px: 0.875rem;
+    --16px: 1rem;
+    --32px: 2rem;
+    --100px: 6.25rem;
+}
+
+/* and how to apply it... */
+section h2 {
+    font-size: var(--32px);
+}
+
+section {
+    text-align: center; /* text align also applies to images! */
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* negative values will bring letters closer together */
+    line-height: 150%; /* sets the vertical spacing between lines of text / normal = font-size (no space) */
+}
+
+/* ---------------- Link States ----------------
+
+order is important!
+
+:link (unclicked)
+:visited
+:hover
+:active (clicked)
+
+---------------- Skeuomorphic Design ----------------
+
+making elements look more real-life! */
+
+button {
+    border: 1px solid #466995;
+    border-radius: 10px;
+    box-shadow: 0px 4px;
+}
+button:hover {
+    cursor: pointer;
+}
+button:active {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    border: 1px solid #466995;
+    border-radius: 10px;
+    box-shadow: 0px 0px;
+    color: #ffffff;
+    background-color: #C0D6DF;
+}
+
+/* ---------------- RESPONSIVE WEB DESIGN  ---------------- */
+
+/* 1. Fluid Grids
+use relative sizes units, min- and max- properties, use flexbox and grid layout, 
+*/
+
+.content-wrapper {
+    width: 70%;
+    max-width: 900px;
+    flex: 1 0 auto;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    column-gap: 20px;
+}
+
+/* 2. Flexible Images 
+keep the html size for performance but make it responsive when scaling
+*/
+
+img {
+    max-width: 100%; /* makes the HTML size span to its maximum within the container */
+    height: auto; /* keeps the ratio */
+}
+
+.background-images {
+    background: url(../images/bg-picture.jpg);
+    background-size: cover;
+}
+
+/* 3. Media Queries:  
+tell the browser what to do in the specified @media statement / add them below the related styles or all together at the bottom or in separate style sheet.
+
+media types: screen, print(print preview), all (all devices, is default when not specified) / logical operator combines media type and media feature / media feature: test for specifics of the browser or device (max-width uses a range (including 650)) / width is best breakpoint to use / no semicolon */
+
+@media screen and (max-width: 650px) { 
+
+/* CSS to be applied if conditions are met */
+
+    h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 400px) { /* for even smaller screens: */
+    body {
+        font-size: 13px;
+    }
+}
+
+@media screen and (min-width:400px) and (max-width: 600px) {    /* setting a mobile range */
+    body {
+        font-size: 13px;
+    }
+}
+@media only screen and (min-device-width: 480px), (orientation: landscape) {
+    /* comma separated properties = when either is met */
+}
+/* ---------------- Resolution sizing  ---------------- */
+/* DPI = dots per inch */
+
+@media only screen and (min-resolution: 300dpi) and (max-resolution: 400dpi){
+    /* CSS for high resolution screens */
+}
+
+/* ---------------- Breadcrumb Navigation ---------------- 
+
+   <ul class="breadcrumb">
+   <li><a href="">Asia</a></li>
+   <li><a href="">Singapore</a></li>
+   <li><a href="">Tourism</a></li>
+   <li><a href="">Hotels</a></li>
+   </ul>
+
+*/
+
+.breadcrumb {
+    text-align: left;
+}
+.breadcrumb li {
+    float: left;
+}
+.breadcrumb a {
+    color: #fff;
+    background: darkcyan;
+    text-decoration: none;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 15px;
+    padding: 0 5px;
+}
+.breadcrumb a::before,
+.breadcrumb a::after {
+    content: "";
+    position: absolute;
+    border-color: darkcyan;
+    border-style: solid;
+    border-width: 15px 5px;
+}
+.breadcrumb a::before {
+    left: -10px;
+    border-left-color: transparent;
+}
+.breadcrumb a::after {
+    left: 100%;
+    border-color: transparent;
+    border-left-color: darkcyan;
+}
+.breadcrumb a:hover {
+    background-color: blue;
+}
+.breadcrumb a:hover::before {
+    border-color: blue;
+    border-left-color: transparent;
+}
+.breadcrumb a:hover::after {
+    border-left-color: blue;
+}
+
+/* ---------------- Fancy Picture Effects ---------------- */
+
+img {
+    transform: rotate(20deg) translateX(30px) translateY(-30px); 
+    /* rotate negative for counter-clockwise / X is horizontal axis, Y is vertical axis */
+    clip-path: ellipse(50% 40% at 50% 50%);
+    /* clips picture into specific shape / specifies horizontal and vertical radius of the picture and the position at  */
+
+}

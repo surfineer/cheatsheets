@@ -1,0 +1,21 @@
+<!-- this is all the general HTML content that will be in every html page -->
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div>
+    <a href="{{ url_for('index') }}">Recipes</a>
+    <!-- in case the links change, the href is referring to the def -->
+    <!-- you can pass variables as well: -->
+    <p><a href="{{ url_for('recipe', id='1') }}">Recipe {{ id }}</a></p>
+    <a href="{{ url_for('about') }}">About</a>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

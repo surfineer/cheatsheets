@@ -1,0 +1,7 @@
+/ expression / flag
+/ re / g
+
+FLAGS:
+g = global, finds all instances (by default, if no flag, it only finds the first instance)
+i = case insensitive
+m = multiline, searches across lines (by default searches only on one line)

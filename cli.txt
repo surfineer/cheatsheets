@@ -1,0 +1,111 @@
+
+## General Stuff ##
+
+cd [directory]                              change directory
+cd ..                                       move up one directory
+cd ../../                                   move up two directories
+ls / dir (windows)                          list files in current directory
+mkdir                                       make new directory
+pwd                                         print working directory path
+touch [filename.txt]                        creates new file
+echo "Hello World"                          prints to command line
+echo "Hello Wolrd" >> [filename.txt]        prints into a new file
+cat [filename.txt]                          prints content of file to command line
+python hello.py > output.txt                runs hello.py script and creates output in file output.txt
+python hello.py >> output.txt               runs hello.py script and adds output to end in file output.txt
+grep [word]                                 global regex print, searches for word an prints its findings
+history                                     shows history of commands
+python                                      opens the python interactive mode
+python --version                           checks installed version of Python
+pip list (-v)                               lists globally installed Python packages (when done in venv will list venv packages) / -v shows with location
+pip install [packageName]==[Version]        install package, optionally with version
+which pip3                                  find pip.exe location
+(windows)
+where pip                                   find pip.exe location
+pip freeze --local (> requirements.txt)     shows (creates) requirements.txt
+cat oceans.txt > continents.txt             > takes the standard output of the command on the left and redirects it to the file on the right
+cat glaciers.txt >> rivers.txt              >> takes the standard output of the command on the left and appends (adds) it to the file on the right
+cat < lakes.txt                             < takes the standard input from the file on the right and inputs it into the program on the left
+cat volcanoes.txt | wc                      | takes the standard output of the command on the left, and pipes it as standard input to the command on the right. You can think of this as “command to command” redirection
+cp ada_lovelace.txt historical/             cp copies files or directories. Here, we copy the file ada_lovelace.txt and place it in the historical/ directory
+
+generate SSH Key
+mkdir .ssh/                                 create hidden ssh directory (in user path)
+ssh-keygen.exe                              creates key
+
+~ Virtual Environments ~
+
+1) in project directory: 
+python -m venv [venvname]
+
+virtualenv [ProjectName]                    
+creates virtual environment (directory) at given path
+
+[from project-path]>[python-version-path.exe] -m venv [name-venv-eg.venv]
+python3 -m venv myapp
+creates from specific python version virtual environment in project directory
+
+2) activate it!
+Linux / Bash: source [venvName]/bin(or Scripts)/activate
+Windows: [venvName]\Scripts\activate.bat
+activates virtual env
+
+~ ~
+
+## SQLite ##
+
+sqlite3                                     opens the SQLite CLI
+.exit                                       closes the SQLite CLI
+.schema                                     shows columns and characteristics of table
+python                                      opens the python interactive mode
+>>> from app import db                      from the app.py file creates an instance of db
+>>> from models import *                    imports all data models (tables)
+>>> db.create_all()                         creates all database tables according to declared models in app.py and stores them as a .db file as specified in the app.config['SQLALCHEMY_DATABASE_URI'] variable in app.py
+
+~ ~
+
+## FLASK ##
+
+flask --app app.py --debug run         runs flask in debug mode
+flask run                              runs all python files starting from app.py (no app.run() statement required)
+python app.py                           will only run one flask file (needs the app.run() statement at the bottom)
+the following commands help not having to restart the server everytime changes are made
+cmd: set FLASK_DEBUG=1                  activates the Flask debugger (do this before running flask)
+bash: export FLASK_DEBUG=1              sets the local server in development mode
+export FLASK_APP=hello.py               tell flask which file to run (default is app.py)
+
+## GIT ##
+
+git add .                               adds all files to the staging area
+git status                              shows currently staged files
+git commit -m ["commit message"]        commits staged files with message
+git checkout -b [branch_name]           creates a new branch and goes into it
+git branch                              shows all local branches
+git branch --show-current               shows current working branch
+git branch -r                           shows all remote branches
+git branch -a                           shows all branches, remote and local
+git branch -D [branch_name]             deletes branch
+git push origin [branch_name]           pushes commits to origin from [branch]
+git checkout [branch_name]              changes into branch
+git pull origin main                    pulls the remote origin (main) into the local main branch
+git config --global user.email          view email associated with GIT
+git config --global user.email [noreply email from git] sets new default email
+git commit --amend --reset-author       resets email from previous commit
+
+~ ~
+
+## GCLOUD ##
+
+gcloud                                  views all commands
+gcloud auth list                        views active accounts
+gcloud auth login                       logs in with gmail
+gcloud config set project [project ID]  sets which project you are working on
+gcloud app deploy                       when in correct directory, uploads all files to GCP
+gcloud app deploy [app.yaml]            uploads only specified file
+gcloud app browse                       open app in web
+gcloud app logs read                    shows app logs (for trouble shooting)
+gcloud auth revoke [email]              logs out
+q                                       quit, close
+[command] --help                        help on that command
+
+~ ~

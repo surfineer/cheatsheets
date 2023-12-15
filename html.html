@@ -1,0 +1,147 @@
+<!--    General Notes: 
+        * For aria reasons, don't write ALL-CAPS in HTML. Use CSS for that. (text-transform: uppercase)    
+        * class attributes can have multiple values sepearated by space, eg. class='title banner'
+        * file names should be all lowercase and separated by - hyphen rather than _ underscore (better SEO)    
+        * industry standard: 'index.html' for base file
+        * use div elements mainly as containers for styling (has no semantic meaning)
+-->
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html lang="en-US" dir="ltr">
+    <head>
+    <!-- meta tags -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- sets width to device width and zoom to 100% -->
+        <meta name="author" content="">
+        <meta name="keywords" content="">
+        <meta name="theme-color" content="#0a0112">
+    <!-- TITLE -->
+        <title>Maria Scholz | Web Developer & Software Engineer</title>
+    <!-- icons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+    <!-- FONTS-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@200;300;400;500;700&display=swap">
+    <!-- CSS -->
+        <link rel="stylesheet" href="/normalize.min.css" />
+        <link rel="stylesheet" href="/reset.css">
+        <link rel="stylesheet" href="static/style.css" type="text/css">
+        <!-- Media Query Style Sheets -->
+        <link rel="stylesheet" href="css/mobile.css" media="screen and (max-device-width: 480px)" type="text/css">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="small.css" />
+        <link rel="stylesheet" media="screen and (min-width: 600px)" href="large.css" />
+        <link rel="stylesheet" media="print" href="print.css" />
+
+    </head>
+    <body>
+        <header></header>
+        <main></main>
+        <section aria-label=""></section>
+        <article></article>
+        <q>quote</q>
+        <aside></aside>
+        <footer></footer>
+
+        <pre>
+        <code>
+        print("Hello World")
+        x = 4
+        </code>
+        </pre>
+
+        <a href="www.google.com" target="_blank" title="Google Search">Click Me!</a>
+        <!-- using href for flask -->
+        <a href="{{ url_for(route_name, flask_var=template_var) }}"></a>
+
+        <button title="button will take you to my homepage">Visit my Page!</button>
+
+        <form action="" method="">
+            <label for="">text</label>
+            <input id="" type="" name="" value="" list="" placeholder="" pattern="" required> 
+            <!-- Input type="submit" for button 
+            name is the variable name (to be used for the backend passing of information)
+            value is the assigned value to the name variable
+            -->
+            <select id="" name="" required> <!-- Drop-Down -->
+                <option value="None">Test</option>
+            <datalist id=""> <!-- filter drop-down but with freeform -->
+                <option value="option1">option1</option>
+                <option value="option2">boption2</option>
+                <option value="option3">coption4</option>
+                <option value="option4">doption5</option>
+            </datalist>
+            <textarea id="" name="" rows="" cols="" required></textarea>
+        </form>
+
+        <!-- checkbox -->
+        <label for=""><input type="checkbox" />This is a Checkbox</label>
+
+        <!-- color picker! -->
+        <label> <input type="color" /> Color Picker </label>
+
+        <details>
+            <summary>Click to expand</summary>
+            <p>My accordion content</p>
+        </details>
+
+        <details open>
+            <summary>Click to collapse</summary>
+            <p>My accordion content</p>
+        </details>
+
+ <!-- IMAGES -->
+ <!-- PNG for images (pixel compression) / JPEG for photos (can't compress well, use high quality) / SVG for vector line art (very scalable) -->
+ <!-- Make sure to have several resolutions for images! -->
+
+    <img src="example-500px.png" srcset="example-1000px.png 2x, example-1500px.png 3x" alt="description of image" height="300" width="200"> 
+    <!-- src is default image -->
+    <!-- have at least 2 different resolutions of images, set the height and width for performance improvement -->
+    <!-- height/width attributes must be an integer without a unit! it is recommended to always include both attributes and use the dimensions of the full-size resource -->
+    <!-- better to give original sizes in HTML and take care of scaling with CSS -->
+    <!-- srcset specifies which resolution pictures are taken when scaling the page followed by their multiplication factor (2x) -->
+    <img src="example-500px.png" srcset="example-800px.png 800w" sizes="50vw" alt="">    
+    <!-- using srcset with width instead of px density descriptor / requires size attribute as well 50vw is 50% of the page -->
+    <img src="example-500px.png" srcset="example-800px.png 800w" sizes="(max-width: 600px) 500px, (max-width: 1000px) 800px, 500px" alt="">
+    <!-- size can also be used with media queries! tells it when to use which size, last statement is ELSE -->
+
+        <img src="images/clock500.jpg" alt="statue of man with bell"
+        sizes="(max-width: 500px) 300px, (max-width:800px) 500px, 800px"
+        srcset="images/clock300.jpg 300w, images/clock500.jpg 500w, images/clock800.jpg 800w"> <!-- all images are specified here -->
+
+    <img src="smallRes.jpg" data-fullsrc="largeRes.jpg">
+
+<!-- More Advanced IMAGING -->
+        <picture>
+            <source media="(min-width:650px)" srcset="img_pink_flowers.jpg"> <!-- media query when to use which image -->
+            <source media="(min-width:465px)" srcset="img_white_flower.jpg">
+            <source srcset="img_blue_flowers.jpg">                          <!-- ELSE use this -->
+            <img src="img_orange_flowers.jpg" alt="Flowers"> 
+            <!-- img src must be last! is last resource if others fail (depending on browser support for <picture/>) -->
+            <img src="example-500px.png" srcset="example-800px.png 800w" sizes="50vw" alt="">
+            <!-- you can even combine both concepts -->
+        </picture>
+
+<!--  -->
+
+
+        <table>
+            <thead></thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+            <th colspan="" rowspan="" scope=""></th> <!-- Table Header (should go within <tr>) -->
+            <tr colspan="" rowspan=""></tr> <!-- Table Row -->
+            <td></td> <!-- Cell Data -->
+        </table>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
