@@ -92,6 +92,7 @@ Book.query.filter(Book.year == 2020).first_or_404(description="There is no user 
 
 # filter_by()
 Book.query.filter_by(year=2020).all()
+Book.query.filter_by(id=int(533)).first()
 
 # filtering for mutliple conditions using " , " (AND)
 Review.query.filter(Review.stars <= 3, Review.book_id == 1).all()
