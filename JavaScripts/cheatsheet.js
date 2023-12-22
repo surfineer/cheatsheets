@@ -74,3 +74,41 @@ switch (athleteFinalPosition) {
   console.log('No medal awarded.');
   break
 }
+
+////////////////////////////////////
+
+// functions
+
+// FUNCTION DECLARATION - classic functions with helper functions
+function monitorCount(rows, columns) {
+  return rows * columns;
+}
+
+function costOfMonitors(rows, columns) {
+  return monitorCount(rows, columns) *200;
+}
+
+// FUNCTION EXPRESSION - variable name instead of function name (= is used)
+const plantNeedsWater1 = function(day){
+  if (day === 'Wednesday'){
+    return true
+  }
+  return false
+}
+
+// ARROW FUNCTION - omits the function keyword (also called ANONYMOUS FUNCTION)
+const plantNeedsWater2 = (day) => {
+  if (day === 'Wednesday') {
+    return true;
+  } else {
+    return false;
+  }
+};
+// concise body arrow function with ternary expression 
+// one parameter (no return keyword necessary) this is called an explicit return
+const plantNeedsWater3 = day => day === 'Wednesday' ? true : false;
+// two parameters
+const plantNeedsWater4 = (day,week) => (day === 'Wednesday' && week % 2 !==0) ? true : false;
+console.log(plantNeedsWater4('Wednesday',43)); //output true
+// zero parameters
+const plantNeedsWater5 = () => console.log('Water the plants.');
