@@ -112,3 +112,31 @@ const plantNeedsWater4 = (day,week) => (day === 'Wednesday' && week % 2 !==0) ? 
 console.log(plantNeedsWater4('Wednesday',43)); //output true
 // zero parameters
 const plantNeedsWater5 = () => console.log('Water the plants.');
+
+
+// LOOPING
+
+const myArray = [6, 19, 20];
+const yourArray = [19, 81, 2];
+for (let i = 0; i < myArray.length; i++) {
+  for (let j = 0; j < yourArray.length; j++) {
+    if (myArray[i] === yourArray[j]) {
+      console.log('Both arrays have the number: ' + yourArray[j]);
+    }
+  }
+}
+
+
+let groceryList = ['orange juice', 'bananas', 'coffee beans', 'brown rice', 'pasta', 'coconut oil', 'plantains'];
+for (const i in groceryList){
+  console.log(`${Number(i)+1}: ${groceryList[i]}`);
+  if (groceryList[i] === 'pasta'){
+    break
+  }
+}
+
+let i = 0;
+do {
+  console.log("Hello");
+  i++;
+  } while (i < 5);
