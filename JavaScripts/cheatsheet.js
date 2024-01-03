@@ -167,6 +167,18 @@ do {
   } while (i < 5);
 
 
+  // return new array in this format ['1: Singapore','2: Singapore', etc.]
+let mixedArray = [1,"Singapore",2,"Singapore",3,"Singapore",4,"Singapore",5,];
+
+function joinTwo(array) {
+  joinedArray = [];
+  for (let i = 0; i < array.length; i += 2) {
+    let entry = array[i] + ": " + array[i + 1];
+    joinedArray.push(entry);
+  }
+  return joinedArray;
+}
+
 // ITERATOR METHODS
 
 // forEach() -> apply function to each element in array but does not return new array (return value is always undefined)
@@ -212,6 +224,16 @@ const smallestNumbers = randomNumbers.filter((num)=>{
 const animalss = ['hippo', 'tiger', 'lion', 'Seal', 'cheetah', 'monkey', 'salamander', 'elephant'];
 const foundAnimal = animalss.findIndex((animal) => {if (animal === 'elephant'){return true;}}); //outputs index 7
 const startsWithS = animalss.findIndex(animal => {return animal[0].toLowerCase() === 's';}) // outputs index 3
+
+
+let multiArray = [[123, 345, 456, 678], [23, 56, 78, 12], [1, 8, 5], [3456, 899, 23, 1],];
+
+// use .reduce() to return new single array with the sums of the sublists as entries
+let singleArray = multiArray.map((sublist) => {
+  return sublist.reduce((accumulator, currentVal) => {
+    return accumulator + currentVal;
+  });
+});
 
   ////////////////////////////////////
 
