@@ -239,6 +239,40 @@ let singleArray = multiArray.map((sublist) => {
 
   // OBJECTS
 
+function dogFactory(name, breed, weight) {
+  if (
+    typeof name == "string" &&
+    typeof breed == "string" &&
+    typeof weight == "number"
+  ) {
+    return { 
+      _name: name, 
+      _breed: breed, 
+      _weight: weight, 
+      get name() {return this._name;},
+      get breed() {return this._breed;},
+      get weight() {return this._weight;},
+      set name(newName) {this._name = newName;},
+      set breed(newBreed) {this._breed = newBreed;},
+      set weight(newWeight) {this._weight = newWeight;},
+      bark(){return 'ruff! ruff!'},
+      eatTooManyTreats(){this._weight++;}
+      };
+  } else {
+    return "Please enter name and breed as text and weight as number!";
+  }
+}
+
+let berry = dogFactory('Joe', 'Pug', 27)
+// Should return { name: 'Joe', breed: 'Pug', weight: 27 }
+
+console.log(berry);
+berry.eatTooManyTreats();
+berry.eatTooManyTreats();
+console.log(berry.weight)
+
+///////
+
   const team = {
   _players: [
     { firstName: "Pablo", lastName: "Doterrez", age: 18 },
