@@ -7,15 +7,18 @@ Make sure spaces (' ') are inserted where they are appropriate.
 */
 
 function groceries(arrayOfObjects){
-    let newArray = [];
-    arrayOfObjects.forEach(element => {
-        newArray.push(Object.values(element));
-    });
+    let newArray = arrayOfObjects.map(
+        (element, index, array) => {
+            let newString = Object.values(element).toString();
+            if (index < array.length -2){
+                newString += ',';
+            } return newString;
+        } 
+    );
     if (arrayOfObjects.length > 1){
     newArray.splice(newArray.length-1,0,'and');}
-    return newArray.join(', ');
+    return newArray.join(' ');
 }
-
 
 console.log(groceries( [{item: 'Carrots'}, {item: 'Hummus'}, {item: 'Pesto'}, {item: 'Rigatoni'}] ));
 // returns 'Carrots, Hummus, Pesto and Rigatoni'
