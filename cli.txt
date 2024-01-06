@@ -109,3 +109,14 @@ q                                       quit, close
 [command] --help                        help on that command
 
 ~ ~
+
+## node ##
+
+node [.js file]                     runs javascript file
+which node                          prints the filepath to Node
+node -v                             prints which version of Node is installed
+node                                opens the node shell (Read-Eval-Print-Loop)
+> process.env.PWD                   process is an object containing data relating to the JavaScript file being executed. 
+                                    process.env is an object containing environment variables such as process.env.PWD which contains the current working directory (and stands for “Print Working Directory”).
+> process.env.HOME                  root of node.js
+.exit                               exits node REPL
