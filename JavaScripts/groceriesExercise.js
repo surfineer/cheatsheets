@@ -1,15 +1,27 @@
 /*
-Write a function groceries() that takes an array of object literals of grocery items. The function should return a string with each item separated by a comma except the last two items should be separated by the word 'and'. Make sure spaces (' ') are inserted where they are appropriate.
+Write a function groceries() that takes an array of object literals of grocery items. 
+The function should return a string with each item separated by a comma 
+except the last two items should be separated by the word 'and'. 
+Make sure spaces (' ') are inserted where they are appropriate.
 
 */
 
+function groceries(arrayOfObjects){
+    let newArray = [];
+    arrayOfObjects.forEach(element => {
+        newArray.push(Object.values(element));
+    });
+    if (arrayOfObjects.length > 1){
+    newArray.splice(newArray.length-1,0,'and');}
+    return newArray.join(', ');
+}
 
 
-groceries( [{item: 'Carrots'}, {item: 'Hummus'}, {item: 'Pesto'}, {item: 'Rigatoni'}] );
+console.log(groceries( [{item: 'Carrots'}, {item: 'Hummus'}, {item: 'Pesto'}, {item: 'Rigatoni'}] ));
 // returns 'Carrots, Hummus, Pesto and Rigatoni'
 
-groceries( [{item: 'Bread'}, {item: 'Butter'}] );
+console.log(groceries( [{item: 'Bread'}, {item: 'Butter'}] ));
 // returns 'Bread and Butter'
 
-groceries( [{item: 'Cheese Balls'}] );
+console.log(groceries( [{item: 'Cheese Balls'}] ));
 // returns 'Cheese Balls'
