@@ -3,14 +3,12 @@ const charCount = (string, char) => Array.from(string)
     .length;
 
 const subLength = (string, character) => {
-    if (charCount(string, character) === 2) {
-        const firstIndex = Array.from(string)
+    if (charCount(string, character) !== 2) return 0;
+            const firstIndex = Array.from(string)
             .findIndex((element) => element === character);
         const secondIndex = Array.from(string)
             .indexOf(character, firstIndex + 1);
-        return (secondIndex - firstIndex) + 1
-    }
-    return 0;
+        return (secondIndex - firstIndex) + 1;
 }
 
 

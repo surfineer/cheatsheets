@@ -165,7 +165,7 @@ console.log(sortYears(years));
 const speciesArray = [ {speciesName:'shark', numTeeth:50}, {speciesName:'dog', numTeeth:42}, {speciesName:'alligator', numTeeth:80}, {speciesName:'human', numTeeth:32}];
 function sortSpeciesByTeeth(arrayOfObject){
   return arrayOfObject.sort(
-    (a,b) => {return a.numTeeth > b.numTeeth}
+    (a,b) => a.numTeeth > b.numTeeth
   )
 }
 console.log(sortSpeciesByTeeth(speciesArray))
@@ -179,17 +179,13 @@ console.log(sortSpeciesByTeeth(speciesArray))
 // .findIndex() and .indexOf()
 
 // using .indexOf()
-function findMyKeys2(arrayOfStrings) {
-  if (arrayOfStrings.includes("keys")) {
-    return arrayOfStrings.indexOf("keys");
-  } else {
-    return -1;
-  }
-}
+const findMyKeys2 = (arrayOfStrings) =>
+  arrayOfStrings.indexOf("keys")
+
 // using .findIndex()
 function findMyKeys(arrayOfStrings) {
   return arrayOfStrings.findIndex(
-    (element) => {return element === "keys";})
+    (element) => element === "keys")
   }
 const randomStuff = [
   "credit card",
