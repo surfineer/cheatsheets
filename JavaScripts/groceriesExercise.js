@@ -6,7 +6,7 @@ Make sure spaces (' ') are inserted where they are appropriate.
 
 */
 
-function groceries(arrayOfObjects){
+const groceries = arrayOfObjects => {
     let newArray = arrayOfObjects.map(
         (element, index, array) => {
             let newString = Object.values(element).toString();
